@@ -70,6 +70,7 @@ struct ContentView: View {
                     HStack(spacing: 6) {
                         RackTabStrip(selection: $selectedTab)
                         programmerToggle(expanded: expanded)
+                        presetMenu
                     }
                     .padding(.horizontal, 8)
                     .modifier(StudioPlate())
@@ -82,7 +83,7 @@ struct ContentView: View {
                                 if expanded {
                                     ProgrammerPanel(file: $selectedFile, bank: $bank, program: $program,
                                                     status: memoryStatus, recall: loadProgram, record: saveProgram,
-                                                    loadPreset: loadInstrumentPreset, compact: true)
+                                                    compact: true)
                                 }
                                 workspace(width: width)
                             }
@@ -130,6 +131,25 @@ struct ContentView: View {
                let expression=try? JSONDecoder().decode(ExpressionParameters.self,from:data) { parameters.expression=expression }
             loadProgram(); apply(); engine.start()
         }
+    }
+
+    private var presetMenu: some View {
+        Menu {
+            ForEach(InstrumentPreset.Family.allCases, id: \.self) { family in
+                Menu(title(family.names)) {
+                    ForEach(InstrumentPreset.allCases.filter { $0.family == family }) { preset in
+                        Button(title(preset.names)) { loadInstrumentPreset(preset) }
+                    }
+                }
+            }
+        } label: {
+            Image(systemName: "music.note.list").frame(width: 38, height: 36)
+        }
+        .menuStyle(.borderlessButton)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help(instrumentText("Instrument presets", "楽器プリセット", "乐器预设"))
+        .accessibilityLabel(instrumentText("Instrument presets", "楽器プリセット", "乐器预设"))
     }
 
     private func programmerToggle(expanded: Bool) -> some View {

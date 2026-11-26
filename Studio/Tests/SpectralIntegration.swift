@@ -53,6 +53,18 @@ private func rms(_ signal: [Float]) -> Float {
 
 @main struct SpectralIntegration {
     static func main() throws {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .sortedKeys
+        var programs = Set<Data>()
+        for preset in InstrumentPreset.allCases {
+            let patch = preset.applying(to: SynthParameters())
+            programs.insert(try encoder.encode(patch))
+            let output = try Probe(patch).note()
+            precondition(rms(output) > 0.0001, "\(preset.rawValue) produced no measurable signal")
+        }
+        precondition(programs.count == InstrumentPreset.allCases.count)
+        print("Orchestra: all \(programs.count) instrument programs produced distinct settings and audible-level output")
+
         var patch = SynthParameters()
         patch.oscBLevel = 0
         patch.oscALevel = 0.8
