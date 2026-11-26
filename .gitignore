@@ -1,0 +1,27 @@
+# macOS metadata
+.DS_Store
+.AppleDouble
+._*
+
+# Xcode user state and SwiftPM workspace settings
+xcuserdata/
+*.xcuserstate
+.swiftpm/xcode/xcuserdata/
+
+# Local build output and test results
+DerivedData/
+.build/
+/build/
+*.xcresult/
+*.xcarchive/
+*.dSYM/
+*.dSYM.zip
+*.ipa
+
+# Local code signing files
+*.mobileprovision
+*.provisionprofile
+*.p12
+
+# Rust build output
+/NativeEngine/target/

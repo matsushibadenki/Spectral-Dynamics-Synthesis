@@ -1,0 +1,953 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00E3212B4BD13CFC11220D5F /* MetalPanelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1260F536669088070CEC2A /* MetalPanelRenderer.swift */; };
+		01649D396DECC33073D478BA /* OutputScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4B2C23F86E948F0C339A99 /* OutputScope.swift */; };
+		06B2644E2BBEDC6C464831F5 /* EffectsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662A981EB3331E9D4DE2951 /* EffectsGraph.swift */; };
+		09565ECE2AD39A9F6EA616B7 /* SpectralAU-iOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F2D709B7AD3D24C17A883777 /* SpectralAU-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0E2B5C528CA1A9DB05124CFF /* ProphetCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F1D2F35EC38FEF638B393 /* ProphetCore.swift */; };
+		211AB1C69CD2F7A643DECA4F /* MetalPanelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1260F536669088070CEC2A /* MetalPanelRenderer.swift */; };
+		214C20AF476772120B99A1D3 /* HostedSynthAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5699A0B8B306637DBC38A9 /* HostedSynthAudioUnit.swift */; };
+		21B56069A98DF3A90F7853EE /* OutputScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4B2C23F86E948F0C339A99 /* OutputScope.swift */; };
+		21F65AE8B30BD177C25708AE /* EffectsDSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E984458DF84D1D8C1B8BC4F /* EffectsDSP.swift */; };
+		23AD36C0E445882A3977DA7A /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE3393F8FDB774121284C4 /* AudioUnitViewController.swift */; };
+		27A1FD54CE4E709939ADACFC /* SharedPerformancePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB3945B3ECC95357527037 /* SharedPerformancePanel.swift */; };
+		285BE9BAF166826FB5C3D00B /* ExpressionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE84B134890CFD8D18B390C /* ExpressionPanel.swift */; };
+		297C702032B5CA9A5EE146B2 /* MetalPanelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1260F536669088070CEC2A /* MetalPanelRenderer.swift */; };
+		2CD0340BA070BCC28F3D18D0 /* EffectsPatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6ADBC10229094ABD42FC5 /* EffectsPatchView.swift */; };
+		304E48C219E1A3972F44D74D /* ProphetCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F1D2F35EC38FEF638B393 /* ProphetCore.swift */; };
+		31663BC374F68D1DA4C76C50 /* HostedSynthAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5699A0B8B306637DBC38A9 /* HostedSynthAudioUnit.swift */; };
+		316D9CBFD33E11775A7CBA4E /* SynthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F5B62B2C833467807F41D /* SynthApp.swift */; };
+		34D94A2DFCB8177C802A744F /* InstrumentChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DA0623CBB1C290F23BE4D /* InstrumentChrome.swift */; };
+		377B364EE33237FC08FC8BD5 /* SpectralAU-macOS.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B81C53A57EBE5977586774D9 /* SpectralAU-macOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		3B13339B1744A1A974EB11E6 /* OutputScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4B2C23F86E948F0C339A99 /* OutputScope.swift */; };
+		435D5C324DC5338F88FEACF3 /* InstrumentPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04E1DB8BBD1C7165F2B977 /* InstrumentPanel.swift */; };
+		47555A2BAC0944147DF3B18C /* ProphetCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F1D2F35EC38FEF638B393 /* ProphetCore.swift */; };
+		4B7D867D0DD25F78AC659EF5 /* EffectsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F661265CA7718FC226B848 /* EffectsViews.swift */; };
+		4DC48A2BC65F5ED84454FBDF /* ProphetCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3F1D2F35EC38FEF638B393 /* ProphetCore.swift */; };
+		4F783F3FDD4C22759D78CE1F /* Rev3Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B6720A8A2023AA02FB0167 /* Rev3Parameters.swift */; };
+		502553C1043E8BF5F7F74210 /* EffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD60C181CAAF97F46224E9CD /* EffectsController.swift */; };
+		52D609745318F7AEFF3084C9 /* Rev3Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B6720A8A2023AA02FB0167 /* Rev3Parameters.swift */; };
+		53FF0A1DA7AB200A2E12E30F /* SpectralOscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C240AD1C214D8BE5334CAA9 /* SpectralOscillator.swift */; };
+		5469B0D04BBA9E1A5664DEA4 /* EffectsDSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E984458DF84D1D8C1B8BC4F /* EffectsDSP.swift */; };
+		57EC73950C06B282D3FABC0C /* MIDIInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E444516F1F407B459C356A76 /* MIDIInputState.swift */; };
+		5A02352CA58C2EFEEC952282 /* SharedPerformancePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB3945B3ECC95357527037 /* SharedPerformancePanel.swift */; };
+		5C4BB8E898900187D6A42A61 /* InstrumentPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04E1DB8BBD1C7165F2B977 /* InstrumentPanel.swift */; };
+		61169CCD4D7BA301906F58FD /* EffectsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662A981EB3331E9D4DE2951 /* EffectsGraph.swift */; };
+		6402A985DE89DD2CE81A2F1B /* EffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD60C181CAAF97F46224E9CD /* EffectsController.swift */; };
+		6997AECA926EA80C27E335ED /* StudioSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF52AA713B6DEFC318FFF13 /* StudioSurface.swift */; };
+		6E561C83ED16682F4C7FACF5 /* InstrumentChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DA0623CBB1C290F23BE4D /* InstrumentChrome.swift */; };
+		71EFA7CAA21A1355CF4CC93F /* UNGE-LICENSE-MIT in Resources */ = {isa = PBXBuildFile; fileRef = F256CE29CB407372FC5082A0 /* UNGE-LICENSE-MIT */; };
+		7202383A421CF5ECD30F70BC /* PatchNodeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5416532D48FB98DB59F03360 /* PatchNodeCard.swift */; };
+		72568D4E0C4C2FF35A7DB3AB /* HostedSynthAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5699A0B8B306637DBC38A9 /* HostedSynthAudioUnit.swift */; };
+		74DD14B26B914E63A04D2EC2 /* EffectsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662A981EB3331E9D4DE2951 /* EffectsGraph.swift */; };
+		75BE8349F809816A7ACA7470 /* PatchNodeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5416532D48FB98DB59F03360 /* PatchNodeCard.swift */; };
+		779B1599721D9855BA4DDD29 /* EffectsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F661265CA7718FC226B848 /* EffectsViews.swift */; };
+		77D0A87AA13A9F668DB5068E /* UNGE-LICENSE-MIT in Resources */ = {isa = PBXBuildFile; fileRef = F256CE29CB407372FC5082A0 /* UNGE-LICENSE-MIT */; };
+		786CCBAE6491A1EFECD850AF /* EffectsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2662A981EB3331E9D4DE2951 /* EffectsGraph.swift */; };
+		790B47E9B7B2E5734BB46E0A /* MetalPanelRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1260F536669088070CEC2A /* MetalPanelRenderer.swift */; };
+		7E613F23FFD5139039B2013A /* InstrumentPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04E1DB8BBD1C7165F2B977 /* InstrumentPanel.swift */; };
+		7F6897FE68C9DF94F03570B6 /* MIDIInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E444516F1F407B459C356A76 /* MIDIInputState.swift */; };
+		81C469031CB5942D2AEEFAFB /* MIDIInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E444516F1F407B459C356A76 /* MIDIInputState.swift */; };
+		81F490AECE81DC9AD6B39E58 /* PatchNodeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5416532D48FB98DB59F03360 /* PatchNodeCard.swift */; };
+		8435EF332F19F4FB90432299 /* MIDIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBE71FEEF1129D6FACAD52 /* MIDIInput.swift */; };
+		855AD91DF90A571AF609DB3E /* InstrumentPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA04E1DB8BBD1C7165F2B977 /* InstrumentPanel.swift */; };
+		95A95D5D1109E34BBBE77297 /* EffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD60C181CAAF97F46224E9CD /* EffectsController.swift */; };
+		96FD820D8E1F9CFD914F4300 /* StudioSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF52AA713B6DEFC318FFF13 /* StudioSurface.swift */; };
+		995CC0BB089854940E879EFF /* SpectralOscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C240AD1C214D8BE5334CAA9 /* SpectralOscillator.swift */; };
+		9A138B8AA4102F3831CD9B7B /* InstrumentChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DA0623CBB1C290F23BE4D /* InstrumentChrome.swift */; };
+		9E5550DCEBE79ABFA00DEDBC /* StudioSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF52AA713B6DEFC318FFF13 /* StudioSurface.swift */; };
+		A1B4F691A3F316965EC6C457 /* SynthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACCD9E46A50C43E8361730B /* SynthEngine.swift */; };
+		A22A9418E6CD3E05FF41F0C6 /* SynthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACCD9E46A50C43E8361730B /* SynthEngine.swift */; };
+		A5BCC69A3AA9D6D35D07B233 /* EffectsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD60C181CAAF97F46224E9CD /* EffectsController.swift */; };
+		A5E522B6F75E4CCF8DBC8EBC /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE3393F8FDB774121284C4 /* AudioUnitViewController.swift */; };
+		A6DB3AE3515953D30980159C /* MasterVolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA42E4876C831765B9CEB2 /* MasterVolumeControl.swift */; };
+		A6F4F3EDBFA7DA424F2B671C /* ExpressionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE84B134890CFD8D18B390C /* ExpressionPanel.swift */; };
+		A9CEE8B8156F4F437A79AA74 /* MIDIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBE71FEEF1129D6FACAD52 /* MIDIInput.swift */; };
+		ABC8F7DC3DDEC437735609AE /* SynthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F5B62B2C833467807F41D /* SynthApp.swift */; };
+		B299605BF776254C6052379D /* EffectsPatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6ADBC10229094ABD42FC5 /* EffectsPatchView.swift */; };
+		B46279752A5B877EA130559B /* MIDIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBE71FEEF1129D6FACAD52 /* MIDIInput.swift */; };
+		B490C3BC7C107C85C8AD89A9 /* MIDIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBBE71FEEF1129D6FACAD52 /* MIDIInput.swift */; };
+		B72E67BC1FA3965532AD1ABB /* SharedPerformancePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB3945B3ECC95357527037 /* SharedPerformancePanel.swift */; };
+		B8C8CA88DAEE26F4BAA9DE8A /* HostedSynthAudioUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C5699A0B8B306637DBC38A9 /* HostedSynthAudioUnit.swift */; };
+		BA225E788D57D44B25E9F80E /* ExpressionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE84B134890CFD8D18B390C /* ExpressionPanel.swift */; };
+		BE98B9ACFBD59FE532601A22 /* MasterVolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA42E4876C831765B9CEB2 /* MasterVolumeControl.swift */; };
+		C6BE05A227A10CA0D5B84B75 /* MasterVolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA42E4876C831765B9CEB2 /* MasterVolumeControl.swift */; };
+		CDDB6131D8B8C79078B0CBBE /* SynthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F5B62B2C833467807F41D /* SynthApp.swift */; };
+		D03C39652A0D587C0538ACE0 /* InstrumentChrome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47DA0623CBB1C290F23BE4D /* InstrumentChrome.swift */; };
+		D22A86A1EBB5FA7112650421 /* EffectsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F661265CA7718FC226B848 /* EffectsViews.swift */; };
+		DDB2C81FA7BF38256734C918 /* SharedPerformancePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DADB3945B3ECC95357527037 /* SharedPerformancePanel.swift */; };
+		DDE0A97A9579344F191CCC3A /* StudioSurface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF52AA713B6DEFC318FFF13 /* StudioSurface.swift */; };
+		E28D94FE903F57FAB83B5BE3 /* SynthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACCD9E46A50C43E8361730B /* SynthEngine.swift */; };
+		E51CDA45D0FA6D4EA1466128 /* SynthApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637F5B62B2C833467807F41D /* SynthApp.swift */; };
+		ED1A479B6EB41BAE4F8C17DF /* PatchNodeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5416532D48FB98DB59F03360 /* PatchNodeCard.swift */; };
+		EDB437DBBBC87A1F20218FA6 /* SpectralOscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C240AD1C214D8BE5334CAA9 /* SpectralOscillator.swift */; };
+		EFF747E043A1C514D2DD893A /* Rev3Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B6720A8A2023AA02FB0167 /* Rev3Parameters.swift */; };
+		F05DA9D3700FA3644FD66703 /* OutputScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4B2C23F86E948F0C339A99 /* OutputScope.swift */; };
+		F075A4616648C20B33124EFB /* MasterVolumeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80AA42E4876C831765B9CEB2 /* MasterVolumeControl.swift */; };
+		F2E3B9CEDE4572EDB5A5CB46 /* Rev3Parameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B6720A8A2023AA02FB0167 /* Rev3Parameters.swift */; };
+		F419A51281B98A20241E8F51 /* SpectralOscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C240AD1C214D8BE5334CAA9 /* SpectralOscillator.swift */; };
+		F504410583A650B9A9C99541 /* SynthEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACCD9E46A50C43E8361730B /* SynthEngine.swift */; };
+		F5AF993B240D9AC6BB92F67E /* EffectsPatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6ADBC10229094ABD42FC5 /* EffectsPatchView.swift */; };
+		F714AB2406EE606EE3EAF54E /* EffectsDSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E984458DF84D1D8C1B8BC4F /* EffectsDSP.swift */; };
+		F81C189D2C6F786FE9B54B24 /* EffectsDSP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E984458DF84D1D8C1B8BC4F /* EffectsDSP.swift */; };
+		FA8062A6CD70754865831607 /* EffectsPatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F6ADBC10229094ABD42FC5 /* EffectsPatchView.swift */; };
+		FC0627136AFC561D1AB3BD8B /* EffectsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F661265CA7718FC226B848 /* EffectsViews.swift */; };
+		FDB0B87B4B3FEF50A65D7EBF /* ExpressionPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEE84B134890CFD8D18B390C /* ExpressionPanel.swift */; };
+		FE016579E9D04AB69A82F43E /* MIDIInputState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E444516F1F407B459C356A76 /* MIDIInputState.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		415616AB7A8E39829E8B2B09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB4818D9A122EE8A9521C27D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5883864E4D98FEF6D8E5AB7;
+			remoteInfo = "SpectralAU-iOS";
+		};
+		B142AB2B2C7A007E76A74295 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB4818D9A122EE8A9521C27D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C999C51746352B6A7F1B4CD;
+			remoteInfo = "SpectralAU-macOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F3F95D4315F0DAAE3DE568CF /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				377B364EE33237FC08FC8BD5 /* SpectralAU-macOS.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FB9F401C5D5A9334BB092A32 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				09565ECE2AD39A9F6EA616B7 /* SpectralAU-iOS.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		14F6ADBC10229094ABD42FC5 /* EffectsPatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsPatchView.swift; sourceTree = "<group>"; };
+		2662A981EB3331E9D4DE2951 /* EffectsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsGraph.swift; sourceTree = "<group>"; };
+		3206F2807A6D357911EF0A0C /* Spectral-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "Spectral-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B1260F536669088070CEC2A /* MetalPanelRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPanelRenderer.swift; sourceTree = "<group>"; };
+		3B3F1D2F35EC38FEF638B393 /* ProphetCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProphetCore.swift; sourceTree = "<group>"; };
+		3C5699A0B8B306637DBC38A9 /* HostedSynthAudioUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostedSynthAudioUnit.swift; sourceTree = "<group>"; };
+		41B6720A8A2023AA02FB0167 /* Rev3Parameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rev3Parameters.swift; sourceTree = "<group>"; };
+		48F661265CA7718FC226B848 /* EffectsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsViews.swift; sourceTree = "<group>"; };
+		4FBBE71FEEF1129D6FACAD52 /* MIDIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIInput.swift; sourceTree = "<group>"; };
+		5416532D48FB98DB59F03360 /* PatchNodeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatchNodeCard.swift; sourceTree = "<group>"; };
+		637F5B62B2C833467807F41D /* SynthApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthApp.swift; sourceTree = "<group>"; };
+		6CF52AA713B6DEFC318FFF13 /* StudioSurface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioSurface.swift; sourceTree = "<group>"; };
+		7E4B2C23F86E948F0C339A99 /* OutputScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputScope.swift; sourceTree = "<group>"; };
+		80AA42E4876C831765B9CEB2 /* MasterVolumeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterVolumeControl.swift; sourceTree = "<group>"; };
+		80FE3393F8FDB774121284C4 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
+		8ACCD9E46A50C43E8361730B /* SynthEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynthEngine.swift; sourceTree = "<group>"; };
+		9C240AD1C214D8BE5334CAA9 /* SpectralOscillator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectralOscillator.swift; sourceTree = "<group>"; };
+		9E984458DF84D1D8C1B8BC4F /* EffectsDSP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsDSP.swift; sourceTree = "<group>"; };
+		A9AD7F41FC21C46FDDC1BCCD /* Spectral-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Spectral-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA04E1DB8BBD1C7165F2B977 /* InstrumentPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentPanel.swift; sourceTree = "<group>"; };
+		B81C53A57EBE5977586774D9 /* SpectralAU-macOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SpectralAU-macOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD60C181CAAF97F46224E9CD /* EffectsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsController.swift; sourceTree = "<group>"; };
+		D47DA0623CBB1C290F23BE4D /* InstrumentChrome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentChrome.swift; sourceTree = "<group>"; };
+		DADB3945B3ECC95357527037 /* SharedPerformancePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPerformancePanel.swift; sourceTree = "<group>"; };
+		E444516F1F407B459C356A76 /* MIDIInputState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIInputState.swift; sourceTree = "<group>"; };
+		F256CE29CB407372FC5082A0 /* UNGE-LICENSE-MIT */ = {isa = PBXFileReference; path = "UNGE-LICENSE-MIT"; sourceTree = "<group>"; };
+		F2D709B7AD3D24C17A883777 /* SpectralAU-iOS.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = "SpectralAU-iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEE84B134890CFD8D18B390C /* ExpressionPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPanel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		32C6F95E55990A48DFB552B5 /* SynthApp */ = {
+			isa = PBXGroup;
+			children = (
+				BD60C181CAAF97F46224E9CD /* EffectsController.swift */,
+				9E984458DF84D1D8C1B8BC4F /* EffectsDSP.swift */,
+				2662A981EB3331E9D4DE2951 /* EffectsGraph.swift */,
+				14F6ADBC10229094ABD42FC5 /* EffectsPatchView.swift */,
+				48F661265CA7718FC226B848 /* EffectsViews.swift */,
+				FEE84B134890CFD8D18B390C /* ExpressionPanel.swift */,
+				3C5699A0B8B306637DBC38A9 /* HostedSynthAudioUnit.swift */,
+				D47DA0623CBB1C290F23BE4D /* InstrumentChrome.swift */,
+				AA04E1DB8BBD1C7165F2B977 /* InstrumentPanel.swift */,
+				80AA42E4876C831765B9CEB2 /* MasterVolumeControl.swift */,
+				3B1260F536669088070CEC2A /* MetalPanelRenderer.swift */,
+				4FBBE71FEEF1129D6FACAD52 /* MIDIInput.swift */,
+				E444516F1F407B459C356A76 /* MIDIInputState.swift */,
+				7E4B2C23F86E948F0C339A99 /* OutputScope.swift */,
+				5416532D48FB98DB59F03360 /* PatchNodeCard.swift */,
+				3B3F1D2F35EC38FEF638B393 /* ProphetCore.swift */,
+				41B6720A8A2023AA02FB0167 /* Rev3Parameters.swift */,
+				DADB3945B3ECC95357527037 /* SharedPerformancePanel.swift */,
+				9C240AD1C214D8BE5334CAA9 /* SpectralOscillator.swift */,
+				6CF52AA713B6DEFC318FFF13 /* StudioSurface.swift */,
+				637F5B62B2C833467807F41D /* SynthApp.swift */,
+				8ACCD9E46A50C43E8361730B /* SynthEngine.swift */,
+			);
+			name = SynthApp;
+			path = Studio/Sources/SynthApp;
+			sourceTree = "<group>";
+		};
+		4809A4A67BDCE0CEAB582F3A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3206F2807A6D357911EF0A0C /* Spectral-iOS.app */,
+				A9AD7F41FC21C46FDDC1BCCD /* Spectral-macOS.app */,
+				F2D709B7AD3D24C17A883777 /* SpectralAU-iOS.appex */,
+				B81C53A57EBE5977586774D9 /* SpectralAU-macOS.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB1E82BA77AAA5706444B729 = {
+			isa = PBXGroup;
+			children = (
+				D1F2015D4C1571959401036C /* Studio */,
+				32C6F95E55990A48DFB552B5 /* SynthApp */,
+				E0E809FF3C422E11D8EF7F97 /* SynthAudioUnit */,
+				4809A4A67BDCE0CEAB582F3A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D1F2015D4C1571959401036C /* Studio */ = {
+			isa = PBXGroup;
+			children = (
+				F256CE29CB407372FC5082A0 /* UNGE-LICENSE-MIT */,
+			);
+			path = Studio;
+			sourceTree = "<group>";
+		};
+		E0E809FF3C422E11D8EF7F97 /* SynthAudioUnit */ = {
+			isa = PBXGroup;
+			children = (
+				80FE3393F8FDB774121284C4 /* AudioUnitViewController.swift */,
+			);
+			name = SynthAudioUnit;
+			path = Studio/Sources/SynthAudioUnit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9C999C51746352B6A7F1B4CD /* SpectralAU-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 245FD2DE17333EE59FE8CE05 /* Build configuration list for PBXNativeTarget "SpectralAU-macOS" */;
+			buildPhases = (
+				F0FA400B7ED050F4390FECA2 /* Build SDS audio engine */,
+				CB0F4FAC9E2EF073D5ABCF9A /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SpectralAU-macOS";
+			packageProductDependencies = (
+			);
+			productName = "SpectralAU-macOS";
+			productReference = B81C53A57EBE5977586774D9 /* SpectralAU-macOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		A03ED2682DE6237AC98E54CF /* Spectral-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85C5E662D291E4CB8E321228 /* Build configuration list for PBXNativeTarget "Spectral-iOS" */;
+			buildPhases = (
+				0EF137FF105BCF74A6AECCBD /* Build SDS audio engine */,
+				2E64D845910C69C7BC594FC9 /* Sources */,
+				F3891A1D50C92D8CA0BF7881 /* Resources */,
+				FB9F401C5D5A9334BB092A32 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00C18B3C5F7B1403050E396A /* PBXTargetDependency */,
+			);
+			name = "Spectral-iOS";
+			packageProductDependencies = (
+			);
+			productName = "Spectral-iOS";
+			productReference = 3206F2807A6D357911EF0A0C /* Spectral-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5883864E4D98FEF6D8E5AB7 /* SpectralAU-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AB1CE2B9EB291A7E67453CB /* Build configuration list for PBXNativeTarget "SpectralAU-iOS" */;
+			buildPhases = (
+				28F454D292F2A3F4A86C7BAA /* Build SDS audio engine */,
+				2BF656793051547204273C54 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SpectralAU-iOS";
+			packageProductDependencies = (
+			);
+			productName = "SpectralAU-iOS";
+			productReference = F2D709B7AD3D24C17A883777 /* SpectralAU-iOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		E182AA31DD822F6E20994832 /* Spectral-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7E3BA96A2B8C79014D1BE4A5 /* Build configuration list for PBXNativeTarget "Spectral-macOS" */;
+			buildPhases = (
+				830CA099231373C3BB7F48A6 /* Build SDS audio engine */,
+				DEFD5952F4E5210717EAA133 /* Sources */,
+				5EE664DFDCEAE6EA5928001B /* Resources */,
+				F3F95D4315F0DAAE3DE568CF /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C59A3C4EF81CAD2727D1471E /* PBXTargetDependency */,
+			);
+			name = "Spectral-macOS";
+			packageProductDependencies = (
+			);
+			productName = "Spectral-macOS";
+			productReference = A9AD7F41FC21C46FDDC1BCCD /* Spectral-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB4818D9A122EE8A9521C27D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					9C999C51746352B6A7F1B4CD = {
+						ProvisioningStyle = Automatic;
+					};
+					A03ED2682DE6237AC98E54CF = {
+						ProvisioningStyle = Automatic;
+					};
+					D5883864E4D98FEF6D8E5AB7 = {
+						ProvisioningStyle = Automatic;
+					};
+					E182AA31DD822F6E20994832 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 41B8A81D982D984D3F992699 /* Build configuration list for PBXProject "Spectral" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CB1E82BA77AAA5706444B729;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 4809A4A67BDCE0CEAB582F3A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E182AA31DD822F6E20994832 /* Spectral-macOS */,
+				9C999C51746352B6A7F1B4CD /* SpectralAU-macOS */,
+				A03ED2682DE6237AC98E54CF /* Spectral-iOS */,
+				D5883864E4D98FEF6D8E5AB7 /* SpectralAU-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5EE664DFDCEAE6EA5928001B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71EFA7CAA21A1355CF4CC93F /* UNGE-LICENSE-MIT in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F3891A1D50C92D8CA0BF7881 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77D0A87AA13A9F668DB5068E /* UNGE-LICENSE-MIT in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0EF137FF105BCF74A6AECCBD /* Build SDS audio engine */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build SDS audio engine";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/libspectral_dsp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/bash \"${SRCROOT}/NativeEngine/build-xcode.sh\"";
+		};
+		28F454D292F2A3F4A86C7BAA /* Build SDS audio engine */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build SDS audio engine";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/libspectral_dsp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/bash \"${SRCROOT}/NativeEngine/build-xcode.sh\"";
+		};
+		830CA099231373C3BB7F48A6 /* Build SDS audio engine */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build SDS audio engine";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/libspectral_dsp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/bash \"${SRCROOT}/NativeEngine/build-xcode.sh\"";
+		};
+		F0FA400B7ED050F4390FECA2 /* Build SDS audio engine */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build SDS audio engine";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/libspectral_dsp.a",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/bash \"${SRCROOT}/NativeEngine/build-xcode.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2BF656793051547204273C54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23AD36C0E445882A3977DA7A /* AudioUnitViewController.swift in Sources */,
+				502553C1043E8BF5F7F74210 /* EffectsController.swift in Sources */,
+				5469B0D04BBA9E1A5664DEA4 /* EffectsDSP.swift in Sources */,
+				61169CCD4D7BA301906F58FD /* EffectsGraph.swift in Sources */,
+				2CD0340BA070BCC28F3D18D0 /* EffectsPatchView.swift in Sources */,
+				D22A86A1EBB5FA7112650421 /* EffectsViews.swift in Sources */,
+				FDB0B87B4B3FEF50A65D7EBF /* ExpressionPanel.swift in Sources */,
+				214C20AF476772120B99A1D3 /* HostedSynthAudioUnit.swift in Sources */,
+				D03C39652A0D587C0538ACE0 /* InstrumentChrome.swift in Sources */,
+				5C4BB8E898900187D6A42A61 /* InstrumentPanel.swift in Sources */,
+				A9CEE8B8156F4F437A79AA74 /* MIDIInput.swift in Sources */,
+				81C469031CB5942D2AEEFAFB /* MIDIInputState.swift in Sources */,
+				C6BE05A227A10CA0D5B84B75 /* MasterVolumeControl.swift in Sources */,
+				790B47E9B7B2E5734BB46E0A /* MetalPanelRenderer.swift in Sources */,
+				3B13339B1744A1A974EB11E6 /* OutputScope.swift in Sources */,
+				81F490AECE81DC9AD6B39E58 /* PatchNodeCard.swift in Sources */,
+				4DC48A2BC65F5ED84454FBDF /* ProphetCore.swift in Sources */,
+				52D609745318F7AEFF3084C9 /* Rev3Parameters.swift in Sources */,
+				27A1FD54CE4E709939ADACFC /* SharedPerformancePanel.swift in Sources */,
+				EDB437DBBBC87A1F20218FA6 /* SpectralOscillator.swift in Sources */,
+				DDE0A97A9579344F191CCC3A /* StudioSurface.swift in Sources */,
+				316D9CBFD33E11775A7CBA4E /* SynthApp.swift in Sources */,
+				F504410583A650B9A9C99541 /* SynthEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2E64D845910C69C7BC594FC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6402A985DE89DD2CE81A2F1B /* EffectsController.swift in Sources */,
+				F714AB2406EE606EE3EAF54E /* EffectsDSP.swift in Sources */,
+				786CCBAE6491A1EFECD850AF /* EffectsGraph.swift in Sources */,
+				F5AF993B240D9AC6BB92F67E /* EffectsPatchView.swift in Sources */,
+				779B1599721D9855BA4DDD29 /* EffectsViews.swift in Sources */,
+				285BE9BAF166826FB5C3D00B /* ExpressionPanel.swift in Sources */,
+				31663BC374F68D1DA4C76C50 /* HostedSynthAudioUnit.swift in Sources */,
+				9A138B8AA4102F3831CD9B7B /* InstrumentChrome.swift in Sources */,
+				7E613F23FFD5139039B2013A /* InstrumentPanel.swift in Sources */,
+				B490C3BC7C107C85C8AD89A9 /* MIDIInput.swift in Sources */,
+				57EC73950C06B282D3FABC0C /* MIDIInputState.swift in Sources */,
+				A6DB3AE3515953D30980159C /* MasterVolumeControl.swift in Sources */,
+				211AB1C69CD2F7A643DECA4F /* MetalPanelRenderer.swift in Sources */,
+				01649D396DECC33073D478BA /* OutputScope.swift in Sources */,
+				ED1A479B6EB41BAE4F8C17DF /* PatchNodeCard.swift in Sources */,
+				0E2B5C528CA1A9DB05124CFF /* ProphetCore.swift in Sources */,
+				F2E3B9CEDE4572EDB5A5CB46 /* Rev3Parameters.swift in Sources */,
+				DDB2C81FA7BF38256734C918 /* SharedPerformancePanel.swift in Sources */,
+				53FF0A1DA7AB200A2E12E30F /* SpectralOscillator.swift in Sources */,
+				9E5550DCEBE79ABFA00DEDBC /* StudioSurface.swift in Sources */,
+				ABC8F7DC3DDEC437735609AE /* SynthApp.swift in Sources */,
+				A22A9418E6CD3E05FF41F0C6 /* SynthEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB0F4FAC9E2EF073D5ABCF9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5E522B6F75E4CCF8DBC8EBC /* AudioUnitViewController.swift in Sources */,
+				A5BCC69A3AA9D6D35D07B233 /* EffectsController.swift in Sources */,
+				21F65AE8B30BD177C25708AE /* EffectsDSP.swift in Sources */,
+				06B2644E2BBEDC6C464831F5 /* EffectsGraph.swift in Sources */,
+				FA8062A6CD70754865831607 /* EffectsPatchView.swift in Sources */,
+				4B7D867D0DD25F78AC659EF5 /* EffectsViews.swift in Sources */,
+				BA225E788D57D44B25E9F80E /* ExpressionPanel.swift in Sources */,
+				72568D4E0C4C2FF35A7DB3AB /* HostedSynthAudioUnit.swift in Sources */,
+				34D94A2DFCB8177C802A744F /* InstrumentChrome.swift in Sources */,
+				855AD91DF90A571AF609DB3E /* InstrumentPanel.swift in Sources */,
+				8435EF332F19F4FB90432299 /* MIDIInput.swift in Sources */,
+				7F6897FE68C9DF94F03570B6 /* MIDIInputState.swift in Sources */,
+				BE98B9ACFBD59FE532601A22 /* MasterVolumeControl.swift in Sources */,
+				297C702032B5CA9A5EE146B2 /* MetalPanelRenderer.swift in Sources */,
+				21B56069A98DF3A90F7853EE /* OutputScope.swift in Sources */,
+				7202383A421CF5ECD30F70BC /* PatchNodeCard.swift in Sources */,
+				47555A2BAC0944147DF3B18C /* ProphetCore.swift in Sources */,
+				4F783F3FDD4C22759D78CE1F /* Rev3Parameters.swift in Sources */,
+				5A02352CA58C2EFEEC952282 /* SharedPerformancePanel.swift in Sources */,
+				995CC0BB089854940E879EFF /* SpectralOscillator.swift in Sources */,
+				96FD820D8E1F9CFD914F4300 /* StudioSurface.swift in Sources */,
+				CDDB6131D8B8C79078B0CBBE /* SynthApp.swift in Sources */,
+				E28D94FE903F57FAB83B5BE3 /* SynthEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEFD5952F4E5210717EAA133 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				95A95D5D1109E34BBBE77297 /* EffectsController.swift in Sources */,
+				F81C189D2C6F786FE9B54B24 /* EffectsDSP.swift in Sources */,
+				74DD14B26B914E63A04D2EC2 /* EffectsGraph.swift in Sources */,
+				B299605BF776254C6052379D /* EffectsPatchView.swift in Sources */,
+				FC0627136AFC561D1AB3BD8B /* EffectsViews.swift in Sources */,
+				A6F4F3EDBFA7DA424F2B671C /* ExpressionPanel.swift in Sources */,
+				B8C8CA88DAEE26F4BAA9DE8A /* HostedSynthAudioUnit.swift in Sources */,
+				6E561C83ED16682F4C7FACF5 /* InstrumentChrome.swift in Sources */,
+				435D5C324DC5338F88FEACF3 /* InstrumentPanel.swift in Sources */,
+				B46279752A5B877EA130559B /* MIDIInput.swift in Sources */,
+				FE016579E9D04AB69A82F43E /* MIDIInputState.swift in Sources */,
+				F075A4616648C20B33124EFB /* MasterVolumeControl.swift in Sources */,
+				00E3212B4BD13CFC11220D5F /* MetalPanelRenderer.swift in Sources */,
+				F05DA9D3700FA3644FD66703 /* OutputScope.swift in Sources */,
+				75BE8349F809816A7ACA7470 /* PatchNodeCard.swift in Sources */,
+				304E48C219E1A3972F44D74D /* ProphetCore.swift in Sources */,
+				EFF747E043A1C514D2DD893A /* Rev3Parameters.swift in Sources */,
+				B72E67BC1FA3965532AD1ABB /* SharedPerformancePanel.swift in Sources */,
+				F419A51281B98A20241E8F51 /* SpectralOscillator.swift in Sources */,
+				6997AECA926EA80C27E335ED /* StudioSurface.swift in Sources */,
+				E51CDA45D0FA6D4EA1466128 /* SynthApp.swift in Sources */,
+				A1B4F691A3F316965EC6C457 /* SynthEngine.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00C18B3C5F7B1403050E396A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5883864E4D98FEF6D8E5AB7 /* SpectralAU-iOS */;
+			targetProxy = 415616AB7A8E39829E8B2B09 /* PBXContainerItemProxy */;
+		};
+		C59A3C4EF81CAD2727D1471E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C999C51746352B6A7F1B4CD /* SpectralAU-macOS */;
+			targetProxy = B142AB2B2C7A007E76A74295 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		118D7DDD5DEEA905260EC799 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Studio/Configuration/App-macOS.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Studio/Configuration/App-macOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		237B4A224E2C659EDA9ED76F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = "Studio/Configuration/Extension-iOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis.AudioUnit;
+				PRODUCT_NAME = SpectralAudioUnit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SYNTH_AUDIO_UNIT";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		32A83E68C75059FECFAEB9DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = "Studio/Configuration/Extension-macOS.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Studio/Configuration/Extension-macOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis.AudioUnit;
+				PRODUCT_NAME = SpectralAudioUnit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SYNTH_AUDIO_UNIT";
+			};
+			name = Release;
+		};
+		3DB045CD94D3BC5C1C4E1188 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = "Studio/Configuration/Extension-macOS.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Studio/Configuration/Extension-macOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis.AudioUnit;
+				PRODUCT_NAME = SpectralAudioUnit;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SYNTH_AUDIO_UNIT";
+			};
+			name = Debug;
+		};
+		3EBC090CA153D7766AC3942F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "SDS Studio";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DERIVED_FILE_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lspectral_dsp",
+				);
+				PRODUCT_NAME = SDS;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/NativeEngine/SpectralDSP.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5CC535339FE558E4E6A35076 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				INFOPLIST_FILE = "Studio/Configuration/Extension-iOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis.AudioUnit;
+				PRODUCT_NAME = SpectralAudioUnit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) SYNTH_AUDIO_UNIT";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		7B931BF4DEDF4E8FEFA5B819 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Studio/Configuration/App-macOS.entitlements";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "Studio/Configuration/App-macOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9B29DEE89026381B1726400E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "SDS Studio";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DERIVED_FILE_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lspectral_dsp",
+				);
+				PRODUCT_NAME = SDS;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/NativeEngine/SpectralDSP.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CBD584E6BCEA30881166279F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Studio/Configuration/App-iOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D60F565729ED279266EBCC5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Studio/Configuration/App-iOS-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.SpectralDynamicsSynthesis;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		245FD2DE17333EE59FE8CE05 /* Build configuration list for PBXNativeTarget "SpectralAU-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DB045CD94D3BC5C1C4E1188 /* Debug */,
+				32A83E68C75059FECFAEB9DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		41B8A81D982D984D3F992699 /* Build configuration list for PBXProject "Spectral" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3EBC090CA153D7766AC3942F /* Debug */,
+				9B29DEE89026381B1726400E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7E3BA96A2B8C79014D1BE4A5 /* Build configuration list for PBXNativeTarget "Spectral-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B931BF4DEDF4E8FEFA5B819 /* Debug */,
+				118D7DDD5DEEA905260EC799 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		85C5E662D291E4CB8E321228 /* Build configuration list for PBXNativeTarget "Spectral-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D60F565729ED279266EBCC5F /* Debug */,
+				CBD584E6BCEA30881166279F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9AB1CE2B9EB291A7E67453CB /* Build configuration list for PBXNativeTarget "SpectralAU-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				237B4A224E2C659EDA9ED76F /* Debug */,
+				5CC535339FE558E4E6A35076 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB4818D9A122EE8A9521C27D /* Project object */;
+}

@@ -1,0 +1,154 @@
+name: Spectral
+options:
+  minimumXcodeGenVersion: 2.38.0
+  deploymentTarget:
+    macOS: '15.0'
+    iOS: '18.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    SWIFT_OPTIMIZATION_LEVEL: -O
+    MARKETING_VERSION: '1.0'
+    CURRENT_PROJECT_VERSION: 1
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+    SWIFT_OBJC_BRIDGING_HEADER: "$(SRCROOT)/NativeEngine/SpectralDSP.h"
+    LIBRARY_SEARCH_PATHS: ["$(inherited)", "$(DERIVED_FILE_DIR)"]
+    OTHER_LDFLAGS: ["$(inherited)", "-lspectral_dsp"]
+    ENABLE_HARDENED_RUNTIME: YES
+    PRODUCT_NAME: SDS
+    INFOPLIST_KEY_CFBundleDisplayName: SDS Studio
+    CLANG_ENABLE_MODULES: YES
+targetTemplates:
+  SpectralDSP:
+    preBuildScripts:
+      - name: Build SDS audio engine
+        script: /bin/bash "${SRCROOT}/NativeEngine/build-xcode.sh"
+        basedOnDependencyAnalysis: false
+        outputFiles:
+          - "$(DERIVED_FILE_DIR)/libspectral_dsp.a"
+targets:
+  Spectral-macOS:
+    templates: [SpectralDSP]
+    type: application
+    platform: macOS
+    sources:
+      - Studio/Sources/SynthApp
+      - path: Studio/UNGE-LICENSE-MIT
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.local.SpectralDynamicsSynthesis
+    info:
+      path: Studio/Configuration/App-macOS-Info.plist
+      properties:
+        CFBundleDisplayName: SDS Studio
+        LSApplicationCategoryType: public.app-category.music
+        NSHighResolutionCapable: true
+    entitlements:
+      path: Studio/Configuration/App-macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+    dependencies:
+      - target: SpectralAU-macOS
+        embed: true
+  SpectralAU-macOS:
+    templates: [SpectralDSP]
+    type: app-extension
+    platform: macOS
+    sources: [Studio/Sources/SynthApp, Studio/Sources/SynthAudioUnit]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.local.SpectralDynamicsSynthesis.AudioUnit
+        PRODUCT_NAME: SpectralAudioUnit
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: '$(inherited) SYNTH_AUDIO_UNIT'
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+    info:
+      path: Studio/Configuration/Extension-macOS-Info.plist
+      properties:
+        CFBundleDisplayName: SDS Studio
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.AudioUnit-UI
+          NSExtensionPrincipalClass: Synth05AudioUnitViewController
+          NSExtensionAttributes:
+            AudioComponents:
+              - name: 'Spectral Dynamics: SDS Studio'
+                description: SDS Studio
+                factoryFunction: Synth05AudioUnitViewController
+                manufacturer: SpDy
+                subtype: SDS2
+                type: aumu
+                version: 65536
+                sandboxSafe: true
+                tags: [Synthesizer]
+    entitlements:
+      path: Studio/Configuration/Extension-macOS.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+  Spectral-iOS:
+    templates: [SpectralDSP]
+    type: application
+    platform: iOS
+    sources:
+      - Studio/Sources/SynthApp
+      - path: Studio/UNGE-LICENSE-MIT
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.local.SpectralDynamicsSynthesis
+        TARGETED_DEVICE_FAMILY: '1,2'
+    info:
+      path: Studio/Configuration/App-iOS-Info.plist
+      properties:
+        CFBundleDisplayName: SDS Studio
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+        UISupportedInterfaceOrientations~ipad: [UIInterfaceOrientationPortrait, UIInterfaceOrientationPortraitUpsideDown, UIInterfaceOrientationLandscapeLeft, UIInterfaceOrientationLandscapeRight]
+    dependencies:
+      - target: SpectralAU-iOS
+        embed: true
+  SpectralAU-iOS:
+    templates: [SpectralDSP]
+    type: app-extension
+    platform: iOS
+    sources: [Studio/Sources/SynthApp, Studio/Sources/SynthAudioUnit]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.local.SpectralDynamicsSynthesis.AudioUnit
+        PRODUCT_NAME: SpectralAudioUnit
+        TARGETED_DEVICE_FAMILY: '1,2'
+        SWIFT_ACTIVE_COMPILATION_CONDITIONS: '$(inherited) SYNTH_AUDIO_UNIT'
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+    info:
+      path: Studio/Configuration/Extension-iOS-Info.plist
+      properties:
+        CFBundleDisplayName: SDS Studio
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.AudioUnit-UI
+          NSExtensionPrincipalClass: Synth05AudioUnitViewController
+          NSExtensionAttributes:
+            AudioComponents:
+              - name: 'Spectral Dynamics: SDS Studio'
+                description: SDS Studio
+                factoryFunction: Synth05AudioUnitViewController
+                manufacturer: SpDy
+                subtype: SDS2
+                type: aumu
+                version: 65536
+                sandboxSafe: true
+                tags: [Synthesizer]
+schemes:
+  Spectral-macOS:
+    build:
+      targets:
+        Spectral-macOS: all
+    run:
+      config: Debug
+  Spectral:
+    build:
+      targets:
+        Spectral-iOS: all
+    run:
+      config: Debug
