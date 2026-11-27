@@ -1,13 +1,6 @@
 import SwiftUI
 import MetalKit
 
-func instrumentText(_ en: String, _ ja: String, _ zh: String) -> String {
-    let language=Locale.preferredLanguages.first ?? "en"
-    if language.hasPrefix("ja") { return ja }
-    if language.hasPrefix("zh") { return zh }
-    return en
-}
-
 struct PanelControl {
     let label: String
     let title: String
@@ -80,7 +73,7 @@ struct InstrumentPanel: View {
             .overlay {
                 GeometryReader { proxy in
                     Color.clear.onAppear { panelColumns=PanelLayout.columns(for:proxy.size.width) }
-                        .onChange(of:proxy.size.width) { width in panelColumns=PanelLayout.columns(for:width) }
+                        .onChange(of:proxy.size.width) { _, width in panelColumns=PanelLayout.columns(for:width) }
                 }.allowsHitTesting(false)
             }
             .frame(height:gpuUnavailable ? 0:nil)
@@ -90,7 +83,7 @@ struct InstrumentPanel: View {
                     .font(.caption).foregroundStyle(.orange)
             }
         }
-        .onChange(of:gpuUnavailable) { unavailable in if unavailable { onUnavailable() } }
+        .onChange(of:gpuUnavailable) { _, unavailable in if unavailable { onUnavailable() } }
 
     }
 

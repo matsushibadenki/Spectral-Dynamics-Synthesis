@@ -34,7 +34,7 @@ cargo test --release --offline --locked --manifest-path NativeEngine/Cargo.toml
 cargo build --release --offline --locked --manifest-path NativeEngine/Cargo.toml
 xcrun swiftc -O -import-objc-header NativeEngine/SpectralDSP.h \
   -L NativeEngine/target/release -lspectral_dsp \
-  Studio/Sources/SynthApp/{ProphetCore,Rev3Parameters,EffectsGraph,EffectsDSP,MIDIInputState,HostedSynthAudioUnit,SpectralOscillator,OutputScope}.swift \
+  Studio/Sources/SynthApp/{ProphetCore,Rev3Parameters,InstrumentPreset,InstrumentText,SynthAUControls,EffectsGraph,EffectsDSP,MIDIInputState,HostedSynthAudioUnit,SpectralOscillator,OutputScope}.swift \
   Studio/Tests/SpectralIntegration.swift -o /tmp/sds-studio-integration
 /tmp/sds-studio-integration
 ```

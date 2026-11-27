@@ -11,13 +11,13 @@ enum RackTab: Int, CaseIterable, Identifiable {
     var icon: String { ["pianokeys","waveform.path","cloud","guitars","waveform.path.ecg","slider.horizontal.3","point.3.connected.trianglepath.dotted"][rawValue] }
     var help: String {
         switch self {
-        case .synth: return fxText("Synthesizer","シンセサイザー","合成器")
+        case .synth: return instrumentText("Synthesizer","シンセサイザー","合成器")
         case .dimension: return "Roland Dimension / Flanger"
         case .ambience: return "Strymon BigSky / TimeLine"
         case .pedal: return "Line 6 DL4 MkII"
         case .ring: return "Moog MF-102"
         case .studio: return "t.c. electronic SCF / 2290"
-        case .patch: return fxText("Node connections","ノード接続","节点连接")
+        case .patch: return instrumentText("Node connections","ノード接続","节点连接")
         }
     }
 }
@@ -71,7 +71,7 @@ struct EffectsWorkspace: View {
                 Label("STEREO FX",systemImage:"cable.connector").font(InstrumentFinish.legend(9)).foregroundStyle(InstrumentFinish.muted)
                 Spacer(minLength:4)
                 Button(action:openPatch) { Image(systemName:"point.3.connected.trianglepath.dotted").frame(width:36,height:32) }
-                    .buttonStyle(HardwareButtonStyle()).help(fxText("Patch cables","ケーブル接続","连线"))
+                    .buttonStyle(HardwareButtonStyle()).help(instrumentText("Patch cables","ケーブル接続","连线"))
             }
             if tab == .ambience {
                 ViewThatFits(in:.horizontal) {
@@ -106,19 +106,19 @@ struct EffectModule: View {
                 }
                 Spacer(minLength:0)
                 Button { showInfo.toggle() } label: { Image(systemName:"info.circle").frame(width:32,height:32) }
-                    .buttonStyle(.plain).help(info).accessibilityLabel(fxText("Effect information","エフェクト情報","效果信息"))
+                    .buttonStyle(.plain).help(info).accessibilityLabel(instrumentText("Effect information","エフェクト情報","效果信息"))
                     .popover(isPresented:$showInfo) { Text(info).font(.callout).padding(20).frame(idealWidth:300) }
                 PanelScrew()
             }
             HStack(spacing:8) {
                 Circle().fill(state.enabled ? InstrumentFinish.amber:InstrumentFinish.amberOff).frame(width:6,height:6)
-                Picker(fxText("Mode","モード","模式"),selection:Binding(get:{state.mode},set:{ value in rack.update(kind) { $0.mode=value } })) {
+                Picker(instrumentText("Mode","モード","模式"),selection:Binding(get:{state.mode},set:{ value in rack.update(kind) { $0.mode=value } })) {
                     ForEach(kind.modes.indices,id:\.self) { Text(kind.modes[$0]).tag($0) }
                 }.labelsHidden().pickerStyle(.menu).tint(InstrumentFinish.ink)
                 Spacer(minLength:0)
                 if kind == .time || kind == .pedal {
                     Button { rack.tap(kind) } label: { Text("TAP").frame(width:44,height:32) }
-                        .buttonStyle(HardwareButtonStyle()).help(fxText("Tap delay time","タップでディレイ時間を設定","点击设置延迟时间"))
+                        .buttonStyle(HardwareButtonStyle()).help(instrumentText("Tap delay time","タップでディレイ時間を設定","点击设置延迟时间"))
                 }
             }.frame(height:32).padding(8).background(InstrumentFinish.recess,in:RoundedRectangle(cornerRadius:4))
             ViewThatFits(in:.horizontal) {
@@ -135,8 +135,8 @@ struct EffectModule: View {
                         Text(state.enabled ? "ENGAGED":"BYPASS").font(InstrumentFinish.legend(9)).frame(width:64,alignment:.leading)
                     }
                 }.buttonStyle(.plain)
-                    .accessibilityLabel(fxText("Effect bypass","エフェクトバイパス","效果旁通"))
-                    .accessibilityValue(state.enabled ? fxText("Engaged","有効","启用"):fxText("Bypassed","バイパス","旁通"))
+                    .accessibilityLabel(instrumentText("Effect bypass","エフェクトバイパス","效果旁通"))
+                    .accessibilityValue(state.enabled ? instrumentText("Engaged","有効","启用"):instrumentText("Bypassed","バイパス","旁通"))
                 Spacer(minLength:4)
                 PanelScrew()
             }
@@ -164,8 +164,8 @@ struct EffectModule: View {
         return kind.controls[index]
     }
     private var info: String {
-        kind.reference + "\n" + fxText("Inspired by the hardware. Independent DSP; not an emulation of every factory algorithm. Patch order is independent of tab order.","実機を参考にした独自DSPです。全アルゴリズムの再現ではありません。タブ順と接続順は独立しています。","参考实机的独立DSP，并非全部算法的仿真。标签顺序与连线顺序相互独立。")
-        + (kind == .pedal ? "\n"+fxText("Looper: 12 seconds, stereo; record → play → overdub. Audio loops are kept in memory only.","ルーパー：ステレオ12秒。録音→再生→重ね録り。録音内容はメモリー内のみ保持します。","循环录音：立体声12秒，录音→播放→叠录，音频仅保存在内存中。") : "")
+        kind.reference + "\n" + instrumentText("Inspired by the hardware. Independent DSP; not an emulation of every factory algorithm. Patch order is independent of tab order.","実機を参考にした独自DSPです。全アルゴリズムの再現ではありません。タブ順と接続順は独立しています。","参考实机的独立DSP，并非全部算法的仿真。标签顺序与连线顺序相互独立。")
+        + (kind == .pedal ? "\n"+instrumentText("Looper: 12 seconds, stereo; record → play → overdub. Audio loops are kept in memory only.","ルーパー：ステレオ12秒。録音→再生→重ね録り。録音内容はメモリー内のみ保持します。","循环录音：立体声12秒，录音→播放→叠录，音频仅保存在内存中。") : "")
     }
     private var pedalControls: some View {
         VStack(spacing:12) {
@@ -174,9 +174,9 @@ struct EffectModule: View {
                     Button { rack.recallPedal(index) } label: {
                         VStack(spacing:5) { Text(["A","B","C"][index]).font(InstrumentFinish.legend()); FootswitchFace(active:state.mode == index) }
                     }.buttonStyle(.plain)
-                        .help(fxText("Recall; secondary click to store","読み込み。右クリック／長押しで保存","载入；右键或长按保存"))
-                        .accessibilityLabel(fxText("Preset ","プリセット ","预设 ")+["A","B","C"][index])
-                        .contextMenu { Button(fxText("Store here","ここに保存","保存到此处")) { rack.storePedal(index) } }
+                        .help(instrumentText("Recall; secondary click to store","読み込み。右クリック／長押しで保存","载入；右键或长按保存"))
+                        .accessibilityLabel(instrumentText("Preset ","プリセット ","预设 ")+["A","B","C"][index])
+                        .contextMenu { Button(instrumentText("Store here","ここに保存","保存到此处")) { rack.storePedal(index) } }
                 }
             }
             if state.mode == 3 {
@@ -186,11 +186,11 @@ struct EffectModule: View {
                     Text(String(format:"%.1f / 12 s",rack.loopSeconds)).font(InstrumentFinish.legend(9)).monospacedDigit()
                 }
                 HStack(spacing:6) {
-                    loopButton("record.circle",fxText("Record / overdub","録音／重ね録り","录音／叠录"),active:rack.loopState == 1 || rack.loopState == 3) { rack.loop(1) }
-                    loopButton("playpause",fxText("Play / stop","再生／停止","播放／停止"),active:rack.loopState == 2) { rack.loop(2) }
-                    loopButton("backward.end",fxText("Reverse","逆再生","反向"),active:state.reverse) { rack.update(.pedal) { $0.reverse.toggle() } }
-                    loopButton("divide",fxText("Half speed","ハーフスピード","半速"),active:state.halfSpeed) { rack.update(.pedal) { $0.halfSpeed.toggle() } }
-                    loopButton("trash",fxText("Clear loop","ループを消去","清除循环"),active:false) { rack.loop(3) }
+                    loopButton("record.circle",instrumentText("Record / overdub","録音／重ね録り","录音／叠录"),active:rack.loopState == 1 || rack.loopState == 3) { rack.loop(1) }
+                    loopButton("playpause",instrumentText("Play / stop","再生／停止","播放／停止"),active:rack.loopState == 2) { rack.loop(2) }
+                    loopButton("backward.end",instrumentText("Reverse","逆再生","反向"),active:state.reverse) { rack.update(.pedal) { $0.reverse.toggle() } }
+                    loopButton("divide",instrumentText("Half speed","ハーフスピード","半速"),active:state.halfSpeed) { rack.update(.pedal) { $0.halfSpeed.toggle() } }
+                    loopButton("trash",instrumentText("Clear loop","ループを消去","清除循环"),active:false) { rack.loop(3) }
                 }
             }
         }.padding(.vertical,8)

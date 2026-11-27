@@ -1,10 +1,5 @@
 import Foundation
 
-func fxText(_ en: String, _ ja: String, _ zh: String) -> String {
-    let language = Locale.preferredLanguages.first ?? "en"
-    return language.hasPrefix("ja") ? ja : (language.hasPrefix("zh") ? zh : en)
-}
-
 enum EffectKind: Int, Codable, CaseIterable, Identifiable {
     case synth, dimension, sky, time, pedal, ring, studio, mixer, output
     var id: Int { rawValue }
@@ -87,7 +82,7 @@ struct FXControl {
         self.lower=lower; self.upper=upper; self.unit=unit; self.logarithmic=logarithmic
     }
     static let mix = FXControl("MIX", "Wet / dry", "ウェット／ドライ", "干湿比")
-    var title: String { fxText(en, ja, zh) }
+    var title: String { instrumentText(en, ja, zh) }
     func actual(_ value: Float) -> Float { logarithmic ? lower * powf(upper/lower,value) : lower+(upper-lower)*value }
     func display(_ value: Float) -> String { String(format: actual(value) >= 100 ? "%.0f%@" : "%.2g%@", actual(value), unit) }
 }
@@ -225,6 +220,7 @@ struct FXEditor {
 final class SharedEffects {
     private let lock=NSLock()
     private var configuration=try! FXDocument.initial.configuration()
+    private var revision: UInt64 = 0
     private var loopState=0, loopSeconds: Float=0
     private var document=FXDocument.initial
     func documentSnapshot() -> FXDocument { lock.lock();defer { lock.unlock() };return document }
@@ -234,19 +230,27 @@ final class SharedEffects {
         next.settings[4].loopSerial=configuration.settings[4].loopSerial
         next.settings[4].loopAction=configuration.settings[4].loopAction
         configuration=next
+        revision &+= 1
         if let document { self.document=document }
         lock.unlock()
     }
     func sendLoop(_ action: Int) {
         lock.lock(); configuration.settings[4].loopSerial &+= 1
-        configuration.settings[4].loopAction=action; lock.unlock()
+        configuration.settings[4].loopAction=action
+        revision &+= 1
+        lock.unlock()
     }
     func resetLoop() {
         lock.lock(); configuration.settings[4].loopSerial=0; configuration.settings[4].loopAction=0
-        loopState=0; loopSeconds=0; lock.unlock()
+        loopState=0; loopSeconds=0
+        revision &+= 1
+        lock.unlock()
     }
-    func trySnapshot() -> FXRenderConfiguration? {
-        guard lock.try() else { return nil }; defer { lock.unlock() }; return configuration
+    func trySnapshot(after previous: UInt64?) -> (revision: UInt64, configuration: FXRenderConfiguration)? {
+        guard lock.try() else { return nil }
+        defer { lock.unlock() }
+        guard revision != previous else { return nil }
+        return (revision, configuration)
     }
     func reportLoop(state: Int,seconds: Float) {
         guard lock.try() else { return }; loopState=state; loopSeconds=seconds; lock.unlock()

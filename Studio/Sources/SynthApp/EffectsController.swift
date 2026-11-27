@@ -25,7 +25,7 @@ final class EffectsController: ObservableObject {
         presets=(savedPresets?.count == 3 && savedPresets!.allSatisfy { state in
             var doc=FXDocument.initial; doc.nodes[4].settings=state; return (try? doc.validate()) != nil
         }) ? savedPresets!:fallback
-        publish(save:false)
+        if persistent { publish(save:false) }
     }
     func settings(_ kind: EffectKind) -> FXSettings { document.nodes.first { $0.kind == kind }!.settings }
     func execute(_ command: FXCommand) {
@@ -85,10 +85,10 @@ final class EffectsController: ObservableObject {
     }
     private func message(_ error: Error) -> String {
         switch error as? FXGraphError {
-        case .cycle: return fxText("A feedback cycle is not allowed. Use the effect's feedback control.","循環接続はできません。エフェクト内のフィードバックを使用してください。","不能循环连接，请使用效果内的反馈控制。")
-        case .occupied: return fxText("Input already connected. Remove its cable first, or use MIX A/B.","接続済みの入力です。先にケーブルを外すか、MIX A/Bを使用してください。","输入已连接，请先移除连线或使用MIX A/B。")
-        case .duplicate: return fxText("Cable already connected.","すでに接続されています。","连线已存在。")
-        default: return fxText("Invalid graph or port.","グラフまたはポートが不正です。","图或端口无效。")
+        case .cycle: return instrumentText("A feedback cycle is not allowed. Use the effect's feedback control.","循環接続はできません。エフェクト内のフィードバックを使用してください。","不能循环连接，请使用效果内的反馈控制。")
+        case .occupied: return instrumentText("Input already connected. Remove its cable first, or use MIX A/B.","接続済みの入力です。先にケーブルを外すか、MIX A/Bを使用してください。","输入已连接，请先移除连线或使用MIX A/B。")
+        case .duplicate: return instrumentText("Cable already connected.","すでに接続されています。","连线已存在。")
+        default: return instrumentText("Invalid graph or port.","グラフまたはポートが不正です。","图或端口无效。")
         }
     }
 }

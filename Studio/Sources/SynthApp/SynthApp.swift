@@ -88,13 +88,13 @@ struct ContentView: View {
                                 workspace(width: width)
                             }
                         }
-                        .onChange(of: programmerExpanded) { _ in
+                        .onChange(of: programmerExpanded) {
                             scroll.scrollTo("workspace-start", anchor: .top)
                         }
-                        .onChange(of: selectedTab) { _ in
+                        .onChange(of: selectedTab) {
                             scroll.scrollTo("workspace-start", anchor: .top)
                         }
-                        .onChange(of: selectedEffect) { _ in
+                        .onChange(of: selectedEffect) {
                             if selectedTab == .fx {
                                 scroll.scrollTo("workspace-start", anchor: .top)
                             }
@@ -111,6 +111,10 @@ struct ContentView: View {
         }
         .preferredColorScheme(.dark)
         .tint(InstrumentFinish.amber)
+        .onChange(of: parameters.expression) { _, expression in
+            guard !engine.isHosted, let data = try? JSONEncoder().encode(expression) else { return }
+            UserDefaults.standard.set(data, forKey: "synth.expression.v1")
+        }
         .onReceive(engine.$midiControlEvent) { event in
             switch event {
             case let .pitch(value): parameters.pitchWheel=value
@@ -329,9 +333,6 @@ struct ContentView: View {
 
     private func apply() {
         engine.applyParameters(parameters)
-        if !engine.isHosted,let data=try? JSONEncoder().encode(parameters.expression) {
-            UserDefaults.standard.set(data,forKey:"synth.expression.v1")
-        }
     }
     private func togglePower() {
         if engine.isRunning { engine.stop() } else { engine.start(); apply() }

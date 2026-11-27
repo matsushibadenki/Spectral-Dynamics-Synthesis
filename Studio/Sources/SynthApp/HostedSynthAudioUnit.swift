@@ -2,38 +2,6 @@ import AVFoundation
 import AudioToolbox
 import CoreMIDI
 
-/// Stable AU addresses: knobs 0...25, switches 100...121, wheels 200/201 and SDS 300...308.
-/// Address order is independent from parameter-tree grouping and saved programs.
-enum SynthAUControls {
-    static let addresses:[AUParameterAddress] = (0..<26).map { UInt64($0) }+(100..<122).map { UInt64($0) }+[200,201]+SpectralOscillatorParameters.knobs.indices.map { UInt64(300+$0) }
-    static func index(_ address:AUParameterAddress)->Int? {
-        if address<26 { return Int(address) }
-        if (100..<122).contains(address) { return Int(address)-100+26 }
-        if address==200 || address==201 { return Int(address)-200+48 }
-        if address >= 300 && address < 300 + UInt64(SpectralOscillatorParameters.knobs.count) { return Int(address)-300+50 }
-        return nil
-    }
-    static func read(_ address:AUParameterAddress,_ p:SynthParameters)->Float {
-        if address<26 { return p[keyPath:Rev3.knobs[Int(address)].key] }
-        if (100..<122).contains(address) { return p[keyPath:Rev3.switches[Int(address)-100].key] ? 1:0 }
-        if address >= 300, index(address) != nil {
-            return p[keyPath:SpectralOscillatorParameters.knobs[Int(address)-300].key]
-        }
-        return address==200 ? p.pitchWheel:p.modWheel
-    }
-    static func write(_ address:AUParameterAddress,_ value:Float,_ p:inout SynthParameters) {
-        guard value.isFinite else { return }
-        if address<26 { let k=Rev3.knobs[Int(address)];p[keyPath:k.key]=k.clamped(value) }
-        else if (100..<122).contains(address) { p[keyPath:Rev3.switches[Int(address)-100].key]=value>=0.5 }
-        else if address==200 { p.pitchWheel=min(1,max(-1,value)) }
-        else if address==201 { p.modWheel=min(1,max(0,value)) }
-        else if address >= 300, index(address) != nil {
-            let knob=SpectralOscillatorParameters.knobs[Int(address)-300]
-            p[keyPath:knob.key]=knob.clamped(value)
-        }
-    }
-}
-
 final class HostedSynthAudioUnit: ProphetLikeAudioUnit {
     private var tree:AUParameterTree!
     private var scratch:AVAudioPCMBuffer?
@@ -43,36 +11,19 @@ final class HostedSynthAudioUnit: ProphetLikeAudioUnit {
     // 16 channels x 128 keys, and per-key aggregate ownership. Fixed before render.
     private var keys=[UInt8](repeating:0,count:2048),counts=[UInt8](repeating:0,count:128)
     private var pedals=[Bool](repeating:false,count:16)
-    override init(componentDescription:AudioComponentDescription,options:AudioComponentInstantiationOptions = []) throws {
-        try super.init(componentDescription:componentDescription,options:options,
-                       parameters:SharedSynthParameters(),effects:SharedEffects())
-        _ = SynthAUControls.addresses // Initialize metadata outside render.
-        let flags:AudioUnitParameterOptions=[.flag_IsReadable,.flag_IsWritable]
-        var children=[AUParameterNode]()
-        for (i,k) in Rev3.knobs.enumerated() {
-            children.append(AUParameterTree.createParameter(withIdentifier:k.id,name:k.names[0],address:UInt64(i),
-                min:k.range.lowerBound,max:k.range.upperBound,unit:.generic,unitName:nil,flags:flags,valueStrings:nil,dependentParameters:nil))
-        }
-        for (i,k) in Rev3.switches.enumerated() {
-            children.append(AUParameterTree.createParameter(withIdentifier:k.id,name:k.names[0],address:UInt64(100+i),
-                min:0,max:1,unit:.boolean,unitName:nil,flags:flags,valueStrings:nil,dependentParameters:nil))
-        }
-        for (i,knob) in SpectralOscillatorParameters.knobs.enumerated() {
-            children.append(AUParameterTree.createParameter(withIdentifier:knob.id,
-                name:instrumentText(knob.names[0],knob.names[1],knob.names[2]),address:UInt64(300+i),
-                min:0,max:1,unit:.generic,unitName:nil,flags:flags,valueStrings:nil,dependentParameters:nil))
-        }
-        for (id,name,address,minimum) in [("pitchWheel","Pitch wheel",200,-1 as Float),("modWheel","Modulation wheel",201,0)] {
-            children.append(AUParameterTree.createParameter(withIdentifier:id,name:name,address:UInt64(address),min:minimum,max:1,
-                unit:.generic,unitName:nil,flags:flags,valueStrings:nil,dependentParameters:nil))
-        }
-        tree=AUParameterTree.createTree(withChildren:children)
-        tree.implementorValueObserver = { [weak self] parameter,value in
-            self?.parameterStorage.set { SynthAUControls.write(parameter.address,value,&$0) }
+    override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions,
+                  parameters: SharedSynthParameters, effects: SharedEffects) throws {
+        try super.init(componentDescription: componentDescription, options: options,
+                       parameters: parameters, effects: effects)
+        _ = SynthAUControls.indexByAddress // Initialize the lookup table before rendering.
+        tree = AUParameterTree.createTree(withChildren: SynthAUControls.all.map { $0.makeParameter() })
+        tree.implementorValueObserver = { [weak self] parameter, value in
+            guard let index = SynthAUControls.indexByAddress[parameter.address] else { return }
+            self?.parameterStorage.set { SynthAUControls.all[index].write(value, to: &$0) }
         }
         tree.implementorValueProvider = { [weak self] parameter in
-            guard let self else { return 0 }
-            return SynthAUControls.read(parameter.address,self.parameterStorage.snapshot())
+            guard let self, let index = SynthAUControls.indexByAddress[parameter.address] else { return 0 }
+            return SynthAUControls.all[index].read(from: self.parameterStorage.snapshot())
         }
     }
     deinit { segment.unsafeMutablePointer.deallocate() }
@@ -88,16 +39,17 @@ final class HostedSynthAudioUnit: ProphetLikeAudioUnit {
     /// Called by the existing UI, outside render, so host automation observers see edits.
     func applyUIParameters(_ value:SynthParameters,previousUI:SynthParameters? = nil) {
         let previous=previousUI ?? parameterStorage.snapshot()
+        let edits = SynthAUControls.all.filter { $0.read(from: previous) != $0.read(from: value) }
         parameterStorage.set { latest in
-            for address in SynthAUControls.addresses where SynthAUControls.read(address,previous) != SynthAUControls.read(address,value) {
-                SynthAUControls.write(address,SynthAUControls.read(address,value),&latest)
+            for control in edits {
+                control.write(control.read(from: value), to: &latest)
             }
             if previous.expression != value.expression { latest.expression=value.expression }
             if previous.referenceA440 != value.referenceA440 { latest.referenceA440=value.referenceA440 }
             if previous.autoTuneTrigger != value.autoTuneTrigger { latest.autoTuneTrigger &+= 1 }
         }
-        for address in SynthAUControls.addresses where SynthAUControls.read(address,previous) != SynthAUControls.read(address,value) {
-            tree.parameter(withAddress:address)?.setValue(SynthAUControls.read(address,value),originator:nil)
+        for control in edits {
+            tree.parameter(withAddress: control.address)?.setValue(control.read(from: value), originator: nil)
         }
     }
     override var fullState:[String:Any]? {
@@ -144,13 +96,17 @@ final class HostedSynthAudioUnit: ProphetLikeAudioUnit {
     }
     override func deallocateRenderResources() { scratch=nil;super.deallocateRenderResources() }
     private func copyPending(into p:inout SynthParameters) {
-        for (i,address) in SynthAUControls.addresses.enumerated() where dirty & (UInt64(1)<<i) != 0 {
-            SynthAUControls.write(address,SynthAUControls.read(address,current),&p)
+        var pending = dirty
+        while pending != 0 {
+            let control = SynthAUControls.all[pending.trailingZeroBitCount]
+            control.write(control.read(from: current), to: &p)
+            pending &= pending - 1
         }
     }
-    private func edit(_ address:AUParameterAddress,_ value:Float) {
-        guard let i=SynthAUControls.index(address),value.isFinite else { return }
-        SynthAUControls.write(address,value,&current);dirty |= UInt64(1)<<i
+    private func edit(_ address: AUParameterAddress, _ value: Float) {
+        guard let index = SynthAUControls.indexByAddress[address], value.isFinite else { return }
+        SynthAUControls.all[index].write(value, to: &current)
+        dirty |= UInt64(1) << index
     }
     private func release(_ channel:Int,_ note:Int,force:Bool=false) {
         let i=channel*128+note

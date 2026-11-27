@@ -25,10 +25,10 @@ struct StudioKeyboard: View {
                 #endif
             }
         }
-            .onChange(of:enabled) { running in if !running { releaseKeys() } }
-            .onChange(of:scenePhase) { phase in if phase != .active { releaseKeys() } }
-            .onChange(of: layout) { _ in releaseKeys() }
-            .onChange(of: keyNotes) { _ in releaseKeys() }
+            .onChange(of:enabled) { _, running in if !running { releaseKeys() } }
+            .onChange(of:scenePhase) { _, phase in if phase != .active { releaseKeys() } }
+            .onChange(of: layout) { releaseKeys() }
+            .onChange(of: keyNotes) { releaseKeys() }
             .onDisappear { releaseKeys() }
     }
     private func wheel(_ index: Int,size: CGSize) -> some View {

@@ -531,11 +531,10 @@ private struct VoiceState {
 }
 
 class ProphetLikeAudioUnit: AUAudioUnit {
-    static var sharedParameters = SharedSynthParameters()
-    static var sharedEffects = SharedEffects()
     private let effects: SharedEffects
     let outputScope = OutputScope()
-    private var effectsDSP = EffectsRackDSP(sampleRate:48_000)
+    private var effectsDSP: EffectsRackDSP?
+    private var effectsRevision: UInt64?
 
     private let outputBus: AUAudioUnitBus
     private var outputBusArray: AUAudioUnitBusArray!
@@ -581,16 +580,11 @@ class ProphetLikeAudioUnit: AUAudioUnit {
     private var pendingEventOverflow = false
     private var rngState: UInt32 = 0x1234ABCD
 
-    override init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
-        self.params = Self.sharedParameters
-        self.effects = Self.sharedEffects
-        outputBus = try AUAudioUnitBus(format: AVAudioFormat(standardFormatWithSampleRate: 48_000, channels: 2)!)
-        try super.init(componentDescription: componentDescription, options: options)
-        outputBusArray = AUAudioUnitBusArray(audioUnit: self, busType: .output, busses: [outputBus])
-        inputBusArray = AUAudioUnitBusArray(audioUnit: self, busType: .input, busses: [])
+    override convenience init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions = []) throws {
+        try self.init(componentDescription: componentDescription, options: options,
+                      parameters: SharedSynthParameters(), effects: SharedEffects())
     }
 
-    // AUv3 supplies independent storage; the standalone initializer remains compatible.
     init(componentDescription: AudioComponentDescription, options: AudioComponentInstantiationOptions,
          parameters: SharedSynthParameters, effects: SharedEffects) throws {
         self.params=parameters;self.effects=effects
@@ -610,9 +604,12 @@ class ProphetLikeAudioUnit: AUAudioUnit {
         heldKeys.removeAll();lastUnison=false;rrCursor=0;ageCounter=0
         voiceLimit = 5
         oscillatorAmounts = .zero
+        expressionAmounts = .zero
+        colorAmounts = SIMD4(0, 0, 0, 1)
+        lastAutoTuneTrigger = renderParameters.autoTuneTrigger
         for i in heldVelocities.indices { heldVelocities[i]=1 }
         for i in voices.indices { voices[i]=VoiceState(index:i) }
-        decimator.reset();effectsDSP.reset();controlsInitialized=false
+        decimator.reset();effectsDSP?.reset();controlsInitialized=false
         spectralOscillator.reset()
         lfoPhase=0;pink = .zero;referencePhase=0;expressionPhase=0
         rngState=0x1234ABCD;renderParameterOverride=nil
@@ -659,6 +656,7 @@ class ProphetLikeAudioUnit: AUAudioUnit {
         sampleRateF = Float(outputBus.format.sampleRate)
         renderParameters = params.snapshot()
         effectsDSP = EffectsRackDSP(sampleRate:sampleRateF)
+        effectsRevision = nil
         oversampling = sampleRateF <= 48000 ? 8 : (sampleRateF <= 96000 ? 4 : 2)
         decimator = VoiceDecimator(factor:oversampling)
         spectralOscillator.reset()
@@ -673,13 +671,21 @@ class ProphetLikeAudioUnit: AUAudioUnit {
         }
     }
 
+    override func deallocateRenderResources() {
+        super.deallocateRenderResources()
+        effectsDSP = nil
+    }
+
     override var internalRenderBlock: AUInternalRenderBlock {
         return { [weak self] _, _, frameCount, _, outputData, _, _ in
-            guard let self else { return noErr }
+            guard let self, let effectsDSP = self.effectsDSP else { return kAudioUnitErr_Uninitialized }
             if let override=self.renderParameterOverride { self.renderParameters=override }
             else if let latest = self.params.trySnapshot() { self.renderParameters = latest }
             let p = self.renderParameters
-            if let configuration=self.effects.trySnapshot() { self.effectsDSP.prepare(configuration) }
+            if let update = self.effects.trySnapshot(after: self.effectsRevision) {
+                effectsDSP.prepare(update.configuration)
+                self.effectsRevision = update.revision
+            }
             var eventCount = 0
             var eventOverflow = false
             if self.eventLock.try() {
@@ -993,14 +999,14 @@ class ProphetLikeAudioUnit: AUAudioUnit {
 
                     // Linear pan preserves the mono sum and avoids a loudness jump.
                     let pan = expressionWave*self.expressionAmounts.z
-                    let processed=self.effectsDSP.process(SIMD2(mono*(1-pan),mono*(1+pan)))
+                    let processed=effectsDSP.process(SIMD2(mono*(1-pan),mono*(1+pan)))
                     let volume=min(1,max(0,p.masterVolume))
                     left[i]=processed.x*volume
                     right[i]=processed.y*volume
                 }
             }
             self.outputScope.capture(left: left, right: right, frames: Int(frameCount), sampleRate: hostRate)
-            self.effects.reportLoop(state:self.effectsDSP.loopState,seconds:self.effectsDSP.loopSeconds)
+            self.effects.reportLoop(state:effectsDSP.loopState,seconds:effectsDSP.loopSeconds)
             return noErr
         }
     }

@@ -59,9 +59,9 @@ struct PatchNodeCard:View {
                             .foregroundStyle(engaged ? node.kind.patchTone:InstrumentFinish.muted)
                             .frame(width:26,height:28)
                     }.buttonStyle(.plain)
-                        .help(fxText("Engage / bypass","有効／バイパス","启用／旁通"))
-                        .accessibilityLabel(node.kind.title+" "+fxText("Bypass","バイパス","旁通"))
-                        .accessibilityValue(engaged ? fxText("Engaged","有効","启用"):fxText("Bypassed","バイパス","旁通"))
+                        .help(instrumentText("Engage / bypass","有効／バイパス","启用／旁通"))
+                        .accessibilityLabel(node.kind.title+" "+instrumentText("Bypass","バイパス","旁通"))
+                        .accessibilityValue(engaged ? instrumentText("Engaged","有効","启用"):instrumentText("Bypassed","バイパス","旁通"))
                 }
             }.padding(.horizontal,10).frame(height:36)
                 .background(node.kind.patchTone.opacity(engaged ? 0.12:0.055))
@@ -77,7 +77,7 @@ struct PatchNodeCard:View {
             Spacer(minLength:0)
             if node.kind != .mixer {
                 PatchNodeSignature(node:node).frame(height:33).padding(.horizontal,56).opacity(engaged ? 0.8:0.32)
-                    .help(fxText("Processing symbol · not a level meter","処理のシンボル（音量メーターではありません）","处理示意图，并非电平表"))
+                    .help(instrumentText("Processing symbol · not a level meter","処理のシンボル（音量メーターではありません）","处理示意图，并非电平表"))
                 Spacer(minLength:0)
                 HStack(spacing:8) {
                     if let control=node.kind.controls.first,let value=node.settings.values.first {
@@ -90,8 +90,8 @@ struct PatchNodeCard:View {
                     Spacer(minLength:0)
                     if effect {
                         Button(action:edit) { Image(systemName:"slider.horizontal.3").font(.system(size:11)).frame(width:28,height:28) }
-                            .buttonStyle(.plain).help(fxText("Edit effect","エフェクトを編集","编辑效果"))
-                            .accessibilityLabel(node.kind.title+" "+fxText("Edit","編集","编辑"))
+                            .buttonStyle(.plain).help(instrumentText("Edit effect","エフェクトを編集","编辑效果"))
+                            .accessibilityLabel(node.kind.title+" "+instrumentText("Edit","編集","编辑"))
                     }
                 }.padding(.horizontal,13).frame(height:30)
             } else { Spacer(minLength:0).frame(height:76) }

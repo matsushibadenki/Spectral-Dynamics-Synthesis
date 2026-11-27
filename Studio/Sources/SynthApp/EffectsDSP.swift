@@ -238,7 +238,7 @@ final class FXProcessor {
         let rate=studio ? 0.05*powf(100,smooth[0]):0.03*powf(5/0.03,smooth[0])
         phase += rate/sr; phase -= floorf(phase)
         let a=sinf(2 * .pi * phase), b=sinf(2 * .pi * phase + .pi*0.5)
-        let dimension=studio ? settings.mode == 0:settings.mode == 0
+        let dimension = settings.mode == 0
         let base: Float=dimension ? 8+smooth[2]*18:(studio ? 0.7+smooth[2]*9:0.3+smooth[2]*11.7)
         let width: Float=dimension ? 7: min(base*0.9,5)
         let l=delay.read((base+width*smooth[1]*a)*0.001*sr)

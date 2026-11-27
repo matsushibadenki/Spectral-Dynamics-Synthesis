@@ -14,8 +14,8 @@ struct EffectsPatchView: View {
             HStack(spacing:6) {
                 Text("PATCH / STEREO").font(InstrumentFinish.legend(11))
                 Spacer(minLength:4)
-                tool("arrow.uturn.backward",fxText("Undo","元に戻す","撤销"),enabled:rack.canUndo) { rack.undo() }
-                tool("arrow.uturn.forward",fxText("Redo","やり直す","重做"),enabled:rack.canRedo) { rack.redo() }
+                tool("arrow.uturn.backward",instrumentText("Undo","元に戻す","撤销"),enabled:rack.canUndo) { rack.undo() }
+                tool("arrow.uturn.forward",instrumentText("Redo","やり直す","重做"),enabled:rack.canRedo) { rack.redo() }
                 Button { showInfo.toggle() } label: { Image(systemName:"info.circle").frame(width:32,height:32) }
                     .buttonStyle(HardwareButtonStyle()).help(instructions)
                     .popover(isPresented:$showInfo) { Text(instructions).padding(20).frame(idealWidth:300) }
@@ -24,7 +24,7 @@ struct EffectsPatchView: View {
                 Button { source=nil; rack.serial() } label: { Label("SERIES",systemImage:"arrow.right").padding(.horizontal,10).frame(height:32) }
                 Button { source=nil; rack.parallel() } label: { Label("PARALLEL",systemImage:"arrow.triangle.branch").padding(.horizontal,10).frame(height:32) }
                 Spacer(minLength:0)
-                if source != nil { tool("xmark",fxText("Cancel cable","接続をキャンセル","取消连线")) { source=nil } }
+                if source != nil { tool("xmark",instrumentText("Cancel cable","接続をキャンセル","取消连线")) { source=nil } }
             }.buttonStyle(HardwareButtonStyle())
             ScrollViewReader { proxy in
             ScrollView([.horizontal,.vertical]) {
@@ -57,7 +57,7 @@ struct EffectsPatchView: View {
                 .onAppear { proxy.scrollTo("patch-origin",anchor:.topLeading) }
             }
             if let source {
-                Text(fxText("Connect: ","接続元：","连接源：")+EffectKind(rawValue:source)!.title)
+                Text(instrumentText("Connect: ","接続元：","连接源：")+EffectKind(rawValue:source)!.title)
                     .font(InstrumentFinish.legend(9)).foregroundStyle(InstrumentFinish.amber)
             }
             if !rack.error.isEmpty { Text(rack.error).font(.caption).foregroundStyle(.orange).fixedSize(horizontal:false,vertical:true) }
@@ -68,11 +68,11 @@ struct EffectsPatchView: View {
                             Text("\(EffectKind(rawValue:edge.from)!.title) → \(EffectKind(rawValue:edge.to)!.title) · \(edge.port.uppercased())")
                                 .font(InstrumentFinish.legend(9)).fixedSize(horizontal:false,vertical:true)
                             Spacer(minLength:4)
-                            tool("xmark",fxText("Disconnect","接続を解除","断开连接")) { rack.execute(.disconnect(edge.id)) }
+                            tool("xmark",instrumentText("Disconnect","接続を解除","断开连接")) { rack.execute(.disconnect(edge.id)) }
                         }
                     }
                 }
-            } label: { Label(fxText("Cables","ケーブル","连线"),systemImage:"cable.connector").font(InstrumentFinish.legend(10)) }
+            } label: { Label(instrumentText("Cables","ケーブル","连线"),systemImage:"cable.connector").font(InstrumentFinish.legend(10)) }
         }.foregroundStyle(InstrumentFinish.ink).padding(.horizontal,16).padding(.vertical,12)
     }
     private func nodeCard(_ node: FXNode) -> some View {
@@ -104,7 +104,7 @@ struct EffectsPatchView: View {
         Button {
             if output { source=node.id;selected=node.id;rack.error="" }
             else if let from=source { rack.connect(from:from,to:node.id,port:port); if rack.error.isEmpty { source=nil } }
-            else { rack.error=fxText("Select an output port first.","先に出力ポートを選択してください。","请先选择输出端口。") }
+            else { rack.error=instrumentText("Select an output port first.","先に出力ポートを選択してください。","请先选择输出端口。") }
         } label: {
             let connected=rack.document.edges.contains { output ? $0.from==node.id:($0.to==node.id && $0.port==port) }
             let color=portColor(node,output:output,port:port)
@@ -119,11 +119,11 @@ struct EffectsPatchView: View {
                         .offset(x:output ? -24:22).allowsHitTesting(false)
                 }
         }.buttonStyle(.plain)
-            .accessibilityLabel(node.kind.title+" "+(output ? fxText("Output","出力","输出"):fxText("Input ","入力 ","输入 ")+port.uppercased()))
-            .help(output ? fxText("Select output","出力を選択","选择输出"):fxText("Connect input; secondary click to disconnect","入力を接続。右クリック／長押しで切断","连接输入，右键或长按断开"))
+            .accessibilityLabel(node.kind.title+" "+(output ? instrumentText("Output","出力","输出"):instrumentText("Input ","入力 ","输入 ")+port.uppercased()))
+            .help(output ? instrumentText("Select output","出力を選択","选择输出"):instrumentText("Connect input; secondary click to disconnect","入力を接続。右クリック／長押しで切断","连接输入，右键或长按断开"))
             .contextMenu {
                 ForEach(rack.document.edges.filter { output ? $0.from == node.id:($0.to == node.id && $0.port == port) }) { edge in
-                    Button(fxText("Disconnect ","接続を解除：","断开连接：")+EffectKind(rawValue:output ? edge.to:edge.from)!.title) { rack.execute(.disconnect(edge.id)) }
+                    Button(instrumentText("Disconnect ","接続を解除：","断开连接：")+EffectKind(rawValue:output ? edge.to:edge.from)!.title) { rack.execute(.disconnect(edge.id)) }
                 }
             }
     }
@@ -137,7 +137,7 @@ struct EffectsPatchView: View {
         return node.kind.patchTone
     }
     private var instructions: String {
-        fxText("Select an output port, then an input port. Remove cables from the input's context menu or cable list. Drag node headers to move. MIX A/B combines parallel branches; disconnected inputs are silent. Edits and settings are saved automatically.","出力ポート→入力ポートの順に選択して接続。入力の右クリック／長押し、またはケーブル一覧から切断できます。見出しをドラッグして移動。MIX A/Bで並列経路を合流します。未接続の入力は無音です。編集と設定は自動保存されます。","依次选择输出、输入端口连接。右键或长按输入端口，或从连线列表断开。拖动标题移动节点。MIX A/B合并并行路径，未连接输入为静音。编辑和设置自动保存。")
+        instrumentText("Select an output port, then an input port. Remove cables from the input's context menu or cable list. Drag node headers to move. MIX A/B combines parallel branches; disconnected inputs are silent. Edits and settings are saved automatically.","出力ポート→入力ポートの順に選択して接続。入力の右クリック／長押し、またはケーブル一覧から切断できます。見出しをドラッグして移動。MIX A/Bで並列経路を合流します。未接続の入力は無音です。編集と設定は自動保存されます。","依次选择输出、输入端口连接。右键或长按输入端口，或从连线列表断开。拖动标题移动节点。MIX A/B合并并行路径，未连接输入为静音。编辑和设置自动保存。")
     }
     private func tool(_ icon: String,_ help: String,enabled: Bool=true,action: @escaping () -> Void) -> some View {
         Button(action:action) { Image(systemName:icon).frame(width:32,height:32) }.buttonStyle(HardwareButtonStyle()).help(help).accessibilityLabel(help).disabled(!enabled)
